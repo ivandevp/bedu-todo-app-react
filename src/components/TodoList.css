@@ -1,0 +1,9 @@
+.todo-list {
+  list-style: none;
+  width: 50%;
+  text-align: left;
+}
+
+.todo-item {
+  border: 1px dashed red;
+}

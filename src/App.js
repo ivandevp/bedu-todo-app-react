@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
+import "./App.scss";
 
-function App() {
+const TodoApp = () => {
+  const [todoList, setTodoList] = useState([]);
+
+  const addTodo = todo => {
+    const newTodoList = [todo, ...todoList];
+    setTodoList(newTodoList);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1 className="title">todos</h1>
+      <TodoForm addTodo={addTodo} />
+      <TodoList todos={todoList} />
     </div>
   );
-}
+};
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <Route path="/" component={TodoApp} />
+    </BrowserRouter>
+  );
+};
 
 export default App;
